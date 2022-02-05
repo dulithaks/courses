@@ -2,11 +2,11 @@
 
 namespace Services;
 
-use App\Models\User;
-use App\Models\Course;
-use App\Models\Result;
-use App\Services\UserService;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Result;
+use App\Models\Course;
+use App\Services\UserService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserServiceTest extends TestCase
@@ -25,13 +25,15 @@ class UserServiceTest extends TestCase
         $this->assertDatabaseCount(Result::class, 0);
 
         $user = User::factory()->create();
-        App\Models\Course::factory()->count(5)->create();
+        Course::factory()->count(5)->create();
         Result::factory()->count(5)->create();
 
         $this->assertDatabaseCount(Result::class, 5);
 
+        $userResultCount = Result::whereUserId($user->id)->count();
+
         $this->service->delete($user);
 
-        $this->assertDatabaseCount(Result::class, 0);
+        $this->assertDatabaseCount(Result::class, 5 - $userResultCount);
     }
 }

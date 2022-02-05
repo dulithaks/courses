@@ -6,6 +6,7 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -25,7 +26,7 @@ class UsersController extends BaseApiController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         return $this->successResponse(User::paginate($request->input('per_page', $this->pageSize)));
     }
@@ -36,7 +37,7 @@ class UsersController extends BaseApiController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -59,7 +60,7 @@ class UsersController extends BaseApiController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
-    public function delete(User $user)
+    public function delete(User $user): JsonResponse
     {
         try {
             $this->userService->delete($user);
