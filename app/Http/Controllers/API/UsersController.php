@@ -14,10 +14,12 @@ class UsersController extends BaseApiController
 {
     private int $pageSize = 5;
     private ?UserService $userService = null;
+    private User $user;
 
-    public function __construct()
+    public function __construct(User $user)
     {
         $this->userService = new UserService();
+        $this->user = $user;
     }
 
     /**
@@ -28,7 +30,7 @@ class UsersController extends BaseApiController
      */
     public function index(Request $request): JsonResponse
     {
-        return $this->successResponse(User::paginate($request->input('per_page', $this->pageSize)));
+        return $this->successResponse($this->user->paginate($request->input('per_page', $this->pageSize)));
     }
 
     /**
@@ -44,7 +46,7 @@ class UsersController extends BaseApiController
                 'name' => 'required',
                 'email' => ['required', 'email'],
             ]);
-            $user = User::create($request->all());
+            $user = $this->user->create($request->all());
             return $this->createResponse($user);
         } catch (ValidationException $e) {
             return $this->validationFailResponse($e);

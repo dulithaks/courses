@@ -105,7 +105,7 @@ class BaseApiController extends Controller
             "message" => $message ?? __('responses.deleted'),
             "payload" => null,
             "status" => true
-        ], 204);
+        ], 200);
     }
 
     /**
