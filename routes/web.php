@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::resource('course', App\Http\Controllers\CourseController::class)->only('index');
-
-
-Route::resource('course', App\Http\Controllers\CourseController::class)->only('index');
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');

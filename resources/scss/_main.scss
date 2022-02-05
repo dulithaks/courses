@@ -1,0 +1,34 @@
+.main-content {
+    max-width: 1000px;
+}
+
+.navbar-brand {
+    font-size: 2em;
+}
+
+.navbar-user {
+    min-width: 3rem;
+    padding: 0;
+}
+
+.validation-errors {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
+
+.nav-item {
+    .nav-link-custom {
+        font-size: 1.2rem;
+        color: white;
+        text-transform: uppercase;
+    }
+}
+
+.navbar-right {
+    .navbar-right__nav-link {
+        cursor: pointer;
+    }
+}
+
