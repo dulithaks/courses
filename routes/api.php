@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group([
+    'namespace' => '\App\Http\Controllers\API',
+], function () {
+    // Users
+    Route::get('users', 'UsersController@index');
+    Route::post('users', 'UsersController@store');
+    Route::delete('users/{user}', 'UsersController@delete');
+
+    // Courses
+    Route::get('courses', 'CoursesController@index');
+    Route::post('courses', 'CoursesController@store');
+
+    // Results
+    Route::get('course/result', 'ResultsController@index');
+    Route::post('course/assign', 'ResultsController@store');
+    Route::put('course/result/{result}', 'ResultsController@update');
 });

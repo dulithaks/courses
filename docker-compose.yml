@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  #PHP Service
+  # PHP Service
   app:
     build:
       context: .
@@ -20,7 +20,7 @@ services:
     networks:
       - app-network
 
-  #Nginx Service
+  # Nginx Service
   webserver:
     image: nginx:alpine
     container_name: webserver
@@ -35,22 +35,40 @@ services:
       - app-network
 
   #MySQL Service
-  db:
-    image: mysql:5.7.22
-    container_name: db
-    restart: unless-stopped
-    tty: true
+  postgresql:
+    image: postgres
+    container_name: pg-docker
     ports:
-      - "3307:3307"
+      - "5432:5432"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: password
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker-compose/pgsql/:/etc/postgresql/
+      - ./data:/var/lib/postgresql/data
+      - ./docker-compose/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    restart: always
     networks:
       - app-network
+
+#  # MySQL Service
+#  db:
+#    image: postgres:10.9-alpine
+#    container_name: db
+#    restart: unless-stopped
+#    tty: true
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      MYSQL_DATABASE: laravel
+#      MYSQL_ROOT_PASSWORD: password
+#      SERVICE_TAGS: dev
+#      SERVICE_NAME: mysql
+#    volumes:
+#      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+#    networks:
+#      - app-network
 
 #Docker Networks
 networks:
