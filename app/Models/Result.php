@@ -32,6 +32,10 @@ class Result extends Model
 {
     use HasFactory;
 
+    const STATUS_NOT_STARTED = 0;
+    const STATUS_FAILED = 1;
+    const STATUS_PASSED = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -53,6 +57,16 @@ class Result extends Model
         'user_id' => 'integer',
         'course_id' => 'integer',
         'status' => 'integer',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'updated_at',
+        'created_at',
     ];
 
     public function user()

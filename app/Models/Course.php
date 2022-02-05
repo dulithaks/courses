@@ -43,4 +43,14 @@ class Course extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'updated_at',
+        'created_at',
+    ];
 }

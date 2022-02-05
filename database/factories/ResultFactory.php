@@ -27,7 +27,7 @@ class ResultFactory extends Factory
         return [
             'user_id' => User::factory(),
             'course_id' => Course::factory(),
-            'status' => $this->faker->numberBetween(-8, 8),
+            'status' => $this->faker->numberBetween(0, 2),
         ];
     }
 }
