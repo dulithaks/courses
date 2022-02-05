@@ -51,7 +51,7 @@ class BaseApiController extends Controller
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function validationFailResponse(ValidationException $e, string $message = null) : JsonResponse
+    public function validationFailResponse(ValidationException $e, string $message = null): JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.validation-fail'),
@@ -68,7 +68,7 @@ class BaseApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    public function failResponse(Exception $e, string $message = null) : JsonResponse
+    public function failResponse(Exception $e, string $message = null): JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.unknown-ex'),
@@ -84,7 +84,7 @@ class BaseApiController extends Controller
      * @param string|null $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createResponse($data, string $message = null) : JsonResponse
+    public function createResponse($data, string $message = null): JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.created'),
@@ -94,12 +94,28 @@ class BaseApiController extends Controller
     }
 
     /**
+     * Common update response
+     *
+     * @param $data
+     * @param string|null $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateResponse($data, string $message = null): JsonResponse
+    {
+        return response()->json([
+            "message" => $message ?? __('responses.updated'),
+            "payload" => $data,
+            "status" => false
+        ], 200);
+    }
+
+    /**
      * Delete response
      *
      * @param string|null $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deleteResponse(string $message = null) : JsonResponse
+    public function deleteResponse(string $message = null): JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.deleted'),
@@ -114,7 +130,7 @@ class BaseApiController extends Controller
      * @param string|null $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function notFoundResponse(string $message = null) : JsonResponse
+    public function notFoundResponse(string $message = null): JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.not-found'),

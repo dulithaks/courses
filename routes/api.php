@@ -29,4 +29,9 @@ Route::group([
     // Courses
     Route::get('courses', 'CoursesController@index');
     Route::post('courses', 'CoursesController@store');
+
+    // Results
+    Route::get('course/result', 'ResultsController@index');
+    Route::post('course/assign', 'ResultsController@store');
+    Route::put('course/result/{result}', 'ResultsController@update');
 });

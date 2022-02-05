@@ -30,7 +30,7 @@ class CoursesController extends BaseApiController
     }
 
     /**
-     * Create user
+     * Create
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse

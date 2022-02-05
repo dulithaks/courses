@@ -75,13 +75,23 @@ class User extends Authenticatable
     ];
 
     /**
-     * Results
+     * Relation to results
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    /**
+     * Relation to results
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'results')->withPivot(['status']);
     }
 
     /**
