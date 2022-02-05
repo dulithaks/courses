@@ -1,0 +1,8 @@
+models:
+  Course:
+    title: string:255
+
+  Result:
+    user_id: id foreign:users
+    course_id: id foreign:courses
+    status: tinyInteger
