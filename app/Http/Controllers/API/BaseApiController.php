@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
+use Throwable;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
@@ -11,6 +12,22 @@ use function response;
 
 class BaseApiController extends Controller
 {
+    /**
+     * Respond not found
+     *
+     * @param \Throwable $e
+     * @param string|null $message
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public static function respondNotFound(Throwable $e, string $message = null)
+    {
+        return response([
+            "message" => $message ?? __('responses.model-not-found'),
+            "payload" => $e->getMessage(),
+            "status" => false
+        ], 404);
+    }
+
     /**
      * Common success response
      *
@@ -34,7 +51,7 @@ class BaseApiController extends Controller
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function validationFailResponse(ValidationException $e, string $message) : JsonResponse
+    public function validationFailResponse(ValidationException $e, string $message = null) : JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.validation-fail'),
@@ -51,7 +68,7 @@ class BaseApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    public function failResponse(Exception $e, string $message) : JsonResponse
+    public function failResponse(Exception $e, string $message = null) : JsonResponse
     {
         return response()->json([
             "message" => $message ?? __('responses.unknown-ex'),
@@ -89,5 +106,20 @@ class BaseApiController extends Controller
             "payload" => null,
             "status" => true
         ], 204);
+    }
+
+    /**
+     * Delete response
+     *
+     * @param string|null $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function notFoundResponse(string $message = null) : JsonResponse
+    {
+        return response()->json([
+            "message" => $message ?? __('responses.not-found'),
+            "payload" => null,
+            "status" => false
+        ], 404);
     }
 }

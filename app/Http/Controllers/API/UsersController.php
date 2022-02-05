@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
-use UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use Illuminate\Validation\ValidationException;
-use function dd;
-use function __;
-use function response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends BaseApiController
 {
     private int $pageSize = 5;
-    private UserService $userService;
+    private ?UserService $userService = null;
 
-    public function __construct(UserService $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
+        $this->userService = new UserService();
     }
 
     /**
@@ -59,6 +57,7 @@ class UsersController extends BaseApiController
      *
      * @param \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
      */
     public function delete(User $user)
     {
@@ -67,6 +66,8 @@ class UsersController extends BaseApiController
             return $this->deleteResponse();
         } catch (ValidationException $e) {
             return $this->validationFailResponse($e);
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse($e);
         } catch (Exception $e) {
             return $this->failResponse($e);
         }

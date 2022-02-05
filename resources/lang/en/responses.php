@@ -5,4 +5,5 @@ return [
     'unknown-ex' => 'Something went wrong!',
     'created' => 'Successfully created.',
     'deleted' => 'Successfully deleted.',
+    'model-not-found' => 'Resource not found!',
 ];
