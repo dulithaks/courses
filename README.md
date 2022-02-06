@@ -58,7 +58,7 @@ If there is any failure, it will display an error message.
 
 ----
 
-## How to run test
+## How to run tests
 
 Login to the app container and then execute.
 
