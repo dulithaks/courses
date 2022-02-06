@@ -5446,7 +5446,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var formData;
+        var formData, comp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -5472,6 +5472,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   course_id: _this3.form.course.id,
                   status: 0
                 };
+                comp = _this3;
                 axios({
                   method: "post",
                   url: "http://127.0.0.1/api/course/assign",
@@ -5479,11 +5480,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   headers: _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["default"].guestHeader()
                 }).then(function (response) {
                   toastr.success('Success.');
+                  comp.form.course = null;
+                  comp.form.user = null;
                 })["catch"](function (response) {
                   response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context3.stop();
             }

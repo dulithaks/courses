@@ -68,6 +68,8 @@ export default {
         status: 0
       }
 
+      const comp = this
+
       axios({
         method: "post",
         url: "http://127.0.0.1/api/course/assign",
@@ -75,7 +77,9 @@ export default {
         headers: AuthService.guestHeader(),
       })
           .then(function (response)  {
-            toastr.success('Success.');
+            toastr.success('Success.')
+            comp.form.course = null
+            comp.form.user = null
           })
           .catch(function (response) {
             response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
