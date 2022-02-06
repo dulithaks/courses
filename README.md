@@ -1,7 +1,7 @@
 ## Clone and build repository
 
 Clone this repository:
-- `https://github.com/dulithaks/courses.git`
+- `git clone https://github.com/dulithaks/courses.git`
 
 Change directory into the project.
 - `cd courses`
