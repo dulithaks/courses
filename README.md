@@ -1,4 +1,4 @@
-## Clone and build repository
+## 1. Clone and build repository
 
 Clone this repository:
 - `git clone https://github.com/dulithaks/courses.git`
@@ -23,7 +23,7 @@ Log in to "app" containers
 
 ---------
 
-## Install composer packages and migrate database
+## 2. Install composer packages and migrate database
 
 *Please execute the below commands, once log in to the app container.*
 
@@ -45,7 +45,7 @@ Seed database
 
 ----
 
-## How to access the web app.
+## 3. How to access the web app.
 
 - Go to the web page with the URL http://127.0.0.1/
 
@@ -58,7 +58,7 @@ If there is any failure, it will display an error message.
 
 ----
 
-## How to run test
+## 4. How to run test
 
 Login to the app container and then execute.
 
@@ -66,7 +66,7 @@ Login to the app container and then execute.
 
 ----
 
-## TODO
+## 5. TODO
 
 - Implement user login and protect routes.
 
