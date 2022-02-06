@@ -63,3 +63,17 @@ If there is any failure, it will display an error message.
 Login to the app container and then execute.
 
 `php artisan config:clear && php artisan test --env=testing`
+
+----
+
+## TODO
+
+- Implement user login and protect routes.
+
+- Implement soft delete.
+
+- Add validation and DB constraints to avoid duplicate rows in the results table.
+
+- Implement pagination fot user and course list rouets.
+
+- Optimize docker container packages.
