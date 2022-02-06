@@ -46,20 +46,14 @@ export default {
     async loadAllUsers() {
       fetch(`http://127.0.0.1/api/users`)
           .then(res => {
-            res.json().then(data => {
-              this.userList = data.payload.data
-              console.log(this.userList)
-            });
+            res.json().then(data => this.userList = data.payload);
           })
     },
 
     async loadAllCourses() {
       fetch(`http://127.0.0.1/api/courses`)
           .then(res => {
-            res.json().then(data => {
-              this.courseList = data.payload.data
-              console.log(data.payload.data)
-            });
+            res.json().then(data => this.courseList = data.payload);
           });
     },
 
@@ -70,7 +64,8 @@ export default {
       const response = await fetch('http://127.0.0.1/api/course/assign', {
         method: "post",
         body: {
-
+          user_id: this.form.user.id,
+          course_id: this.form.course.id,
           status: 0
         },
       });

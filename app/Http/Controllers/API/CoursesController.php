@@ -26,7 +26,7 @@ class CoursesController extends BaseApiController
      */
     public function index(Request $request): JsonResponse
     {
-        return $this->successResponse($this->course->paginate($request->input('per_page', $this->pageSize)));
+        return $this->successResponse($this->course->all());
     }
 
     /**

@@ -1,4 +1,4 @@
-import Login from "./components/Login";
+import Login from "./components/Home";
 import NotFound from "./components/NotFound";
 
 export const routes = [
@@ -8,8 +8,8 @@ export const routes = [
         component: NotFound
     },
     {
-        name: 'login',
-        path: '/login',
+        name: 'home',
+        path: '/',
         component: Login
     },
 ];
