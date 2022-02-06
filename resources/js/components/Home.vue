@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import AuthService from './../services/auth.service'
 
 export default {
   data() {
@@ -61,30 +62,24 @@ export default {
       if (!this.form.user) return toastr.error('Please select a user!')
       if (!this.form.course) return toastr.error('Please choose a course!')
 
-      const response = await fetch('http://127.0.0.1/api/course/assign', {
+      const formData = {
+        user_id: this.form.user.id,
+        course_id: this.form.course.id,
+        status: 0
+      }
+
+      axios({
         method: "post",
-        body: {
-          user_id: this.form.user.id,
-          course_id: this.form.course.id,
-          status: 0
-        },
-      });
-
-      const responseData = await response.json();
-
-      if (response.status === 200) {
-        toastr.success('Success.');
-        this.form.user = null
-        this.form.course = null
-      }
-
-      if (response.status === 422) {
-        responseData.message ? toastr.error(responseData.message) : toastr.error('Invalid data!');
-      }
-
-      if (response.status === 500) {
-        responseData.message ? toastr.error(responseData.message) : toastr.error('Something went wrong!');
-      }
+        url: "http://127.0.0.1/api/course/assign",
+        data: formData,
+        headers: AuthService.guestHeader(),
+      })
+          .then(function (response)  {
+            toastr.success('Success.');
+          })
+          .catch(function (response) {
+            response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
+          });
     },
   }
 }

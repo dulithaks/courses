@@ -5349,6 +5349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/auth.service */ "./resources/js/services/auth.service.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5380,6 +5381,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5444,7 +5446,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response, responseData;
+        var formData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -5465,39 +5467,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.abrupt("return", toastr.error('Please choose a course!'));
 
               case 4:
-                _context3.next = 6;
-                return fetch('http://127.0.0.1/api/course/assign', {
+                formData = {
+                  user_id: _this3.form.user.id,
+                  course_id: _this3.form.course.id,
+                  status: 0
+                };
+                axios({
                   method: "post",
-                  body: {
-                    user_id: _this3.form.user.id,
-                    course_id: _this3.form.course.id,
-                    status: 0
-                  }
+                  url: "http://127.0.0.1/api/course/assign",
+                  data: formData,
+                  headers: _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["default"].guestHeader()
+                }).then(function (response) {
+                  toastr.success('Success.');
+                })["catch"](function (response) {
+                  response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
                 });
 
               case 6:
-                response = _context3.sent;
-                _context3.next = 9;
-                return response.json();
-
-              case 9:
-                responseData = _context3.sent;
-
-                if (response.status === 200) {
-                  toastr.success('Success.');
-                  _this3.form.user = null;
-                  _this3.form.course = null;
-                }
-
-                if (response.status === 422) {
-                  responseData.message ? toastr.error(responseData.message) : toastr.error('Invalid data!');
-                }
-
-                if (response.status === 500) {
-                  responseData.message ? toastr.error(responseData.message) : toastr.error('Something went wrong!');
-                }
-
-              case 13:
               case "end":
                 return _context3.stop();
             }
