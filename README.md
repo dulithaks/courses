@@ -1,4 +1,4 @@
-## 1. Clone and build repository
+## 1. Clone and build repository.
 
 Clone this repository:
 - `git clone https://github.com/dulithaks/courses.git`
@@ -23,7 +23,7 @@ Log in to "app" containers
 
 ---------
 
-## 2. Install composer packages and migrate database
+## 2. Install composer packages and migrate database.
 
 *Please execute the below commands, once log in to the app container.*
 
@@ -58,7 +58,7 @@ If there is any failure, it will display an error message.
 
 ----
 
-## 4. How to run test
+## 4. How to run tests.
 
 Login to the app container and then execute.
 
