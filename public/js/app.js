@@ -5381,10 +5381,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      loading: false,
       form: {
         user: null,
         course: null
@@ -5393,7 +5398,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       courseList: []
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     this.loadAllUsers();
     this.loadAllCourses();
   },
@@ -5467,6 +5472,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.abrupt("return", toastr.error('Please choose a course!'));
 
               case 4:
+                _this3.loading = true;
                 formData = {
                   user_id: _this3.form.user.id,
                   course_id: _this3.form.course.id,
@@ -5484,9 +5490,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   comp.form.user = null;
                 })["catch"](function (response) {
                   response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
+                })["finally"](function () {
+                  return _this3.loading = false;
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -23446,7 +23454,7 @@ var render = function () {
         "button",
         {
           staticClass: "btn btn-dark w-50",
-          attrs: { type: "button" },
+          attrs: { disabled: _vm.loading, type: "button" },
           on: {
             click: function ($event) {
               $event.preventDefault()
@@ -23454,7 +23462,35 @@ var render = function () {
             },
           },
         },
-        [_vm._v("Submit")]
+        [
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.loading,
+                  expression: "!loading",
+                },
+              ],
+            },
+            [_vm._v("Submit")]
+          ),
+          _vm._v(" "),
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loading,
+                expression: "loading",
+              },
+            ],
+            staticClass: "spinner-border spinner-border-sm",
+            attrs: { role: "status" },
+          }),
+        ]
       ),
     ]),
   ])

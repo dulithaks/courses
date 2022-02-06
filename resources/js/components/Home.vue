@@ -18,7 +18,11 @@
       ></v-select>
     </div>
     <div class="mb-3 text-center">
-      <button v-on:click.prevent="submit" type="button" class="btn btn-dark w-50">Submit</button>
+      <button v-on:click.prevent="submit" :disabled="loading" type="button" class="btn btn-dark w-50">
+        <span v-show="!loading">Submit</span>
+        <div v-show="loading" class="spinner-border spinner-border-sm" role="status">
+        </div>
+      </button>
     </div>
   </div>
 </template>
@@ -29,6 +33,7 @@ import AuthService from './../services/auth.service'
 export default {
   data() {
     return {
+      loading:false,
       form: {
         user: null,
         course: null,
@@ -38,7 +43,7 @@ export default {
     }
   },
 
-  mounted: function () {
+  beforeMount: function () {
     this.loadAllUsers()
     this.loadAllCourses()
   },
@@ -62,6 +67,7 @@ export default {
       if (!this.form.user) return toastr.error('Please select a user!')
       if (!this.form.course) return toastr.error('Please choose a course!')
 
+      this.loading = true;
       const formData = {
         user_id: this.form.user.id,
         course_id: this.form.course.id,
@@ -83,7 +89,7 @@ export default {
           })
           .catch(function (response) {
             response.message ? toastr.error(response.message) : toastr.error('Something went wrong!');
-          });
+          }).finally(() => this.loading = false);
     },
   }
 }
