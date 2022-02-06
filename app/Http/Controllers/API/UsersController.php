@@ -30,7 +30,7 @@ class UsersController extends BaseApiController
      */
     public function index(Request $request): JsonResponse
     {
-        return $this->successResponse($this->user->paginate($request->input('per_page', $this->pageSize)));
+        return $this->successResponse($this->user->all());
     }
 
     /**
