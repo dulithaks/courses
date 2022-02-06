@@ -27,6 +27,7 @@
         "vue-axios": "^3.2.5",
         "vue-loader": "^15.9.8",
         "vue-router": "^3.5.2",
+        "vue-select": "^3.16.0",
         "vuelidate": "^0.7.6"
     }
 }
