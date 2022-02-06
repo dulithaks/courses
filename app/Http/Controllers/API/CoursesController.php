@@ -7,10 +7,10 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use function dd;
 
 class CoursesController extends BaseApiController
 {
-    private int $pageSize = 5;
     private Course $course;
 
     public function __construct(Course $course)
@@ -21,10 +21,9 @@ class CoursesController extends BaseApiController
     /**
      * All users with pagination
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
         return $this->successResponse($this->course->all());
     }
