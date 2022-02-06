@@ -9,6 +9,7 @@ use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use function dd;
 
 class UsersController extends BaseApiController
 {
@@ -45,6 +46,7 @@ class UsersController extends BaseApiController
             $request->validate([
                 'name' => 'required',
                 'email' => ['required', 'email'],
+                'password' => ['required', 'min:8'],
             ]);
             $user = $this->user->create($request->all());
             return $this->createResponse($user);
