@@ -6,7 +6,7 @@ import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import {routes} from './routes';
-import Vuelidate from 'vuelidate'
+// import Vuelidate from 'vuelidate'
 import Vue from 'vue'
 import vSelect from 'vue-select'
 
@@ -14,7 +14,7 @@ Vue.component('v-select', vSelect)
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-Vue.use(Vuelidate)
+// Vue.use(Vuelidate)
 
 const router = new VueRouter({
     mode: 'history',
