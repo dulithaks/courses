@@ -15,4 +15,4 @@ yarn-error.log
 /.vscode
 /.blueprint
 .phpstorm.meta.php
-/data/
+/data/*
