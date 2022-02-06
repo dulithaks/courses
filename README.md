@@ -64,6 +64,7 @@ Login to the app container and then execute.
 
 `php artisan config:clear && php artisan test --env=testing`
 
+----
 
 ## TODO
 
